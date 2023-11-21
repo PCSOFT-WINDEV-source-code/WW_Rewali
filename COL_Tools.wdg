@@ -1,0 +1,261 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_Tools
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x143d43de0bf2687b
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes :
+   -
+     code : |1+
+      constant
+      	PICTO_ERROR = "..\Images\error.png"
+      	PICTO_ERROR_BRW = "Images\error.png"
+      	PICTO_INFO = "..\Images\info.png"
+      end
+      
+      gnErrorColor is int = RGB(238, 196, 208)
+      gsErrorColor_Brw is string = "RGB(238, 196, 208)"
+      
+      gnColorInfo is int = RGB(212, 245, 216)
+     type : 720896
+  procedures :
+   -
+     name : FormatReduction
+     internal_properties : CAAAAAgAAAAKuGh088yz/Sx+7+3pJhlC0HV4DdmRjyVwu1U3dofYQt1HSbAltb4vNNeTqfnOyVqQYFafaSmJKCG2nL4I2mH3ijW2ENAn30r9Jx9FFmQ8RL9/nOYyiLB/XvxJO7qgCVDPSl5e1dg+yayBGkVOsDhtHcxCNbGVXAaOpFeNzJ4K7qKNzsLB4e+OJUatQfK4toJOgm1NqgjPiDYmAK4qnXw/Uq2Jg9ytQEIUbSiULaAkf0wA1FLOhMOvrfNaUbnhhBeEmUB/On/hw6uEONIfVfJLCvGzfj9zNm4PNBb5N7RzDO0FvfJeMoU=
+     procedure_id : 1458396475300210811
+     type_code : 15
+     code : |1+
+      // Summary: Format the reduction for the display 
+      // Syntax:
+      // [ <Result> = ] FormatReduction (<sReduction> is string)
+      //
+      // Parameters:
+      //	sReduction (ANSI string): Raw reduction
+      // Return value:
+      // 	ANSI string: Reduction with HTML formatting for the display
+      
+      procedure FormatReduction(local sReduction is string)
+      
+      sFormatiingReduction	is string
+      
+      sBaseHTML				is string 
+      
+      
+      switch sReduction
+      	case [= "Up to "
+      		
+      		sKeyWord is string = "Up to "
+      		
+      		if PageCurrentLayout() = 2 then
+      			sBaseHTML = [
+      			<p>%1</p>
+      			<p style="font-size: 24px;">%2</p>
+      			]
+      			
+      		else
+      			sBaseHTML = [
+      			<p>%1</p>
+      			<p style="font-size: 24px;">%2</p>
+      			]
+      			
+      		end
+      		
+      		
+      		sLine2 is string = ExtractString(sReduction,2, sKeyWord)
+      		sFormatiingReduction = StringBuild(sBaseHTML, sKeyWord, sLine2)
+      		
+      	case [= "From "
+      		
+      		sKeyWord is string = "From "
+      		
+      		if PageCurrentLayout() = 2 then
+      			
+      			sBaseHTML = [
+      			<p>%1</p>
+      			<p style="font-size: 14px;">%2</p>
+      			]
+      			
+      		else
+      			
+      			sBaseHTML = [
+      			<p>%1</p>
+      			<p style="font-size: 24px;">%2</p>
+      			]
+      			
+      		end
+      		
+      		sLine2 is string = ExtractString(sReduction,2, sKeyWord)
+      		sFormatiingReduction = StringBuild(sBaseHTML, sKeyWord, sLine2)
+      		
+      	case [= "EXCLUSIVE" :
+      		
+      		if PageCurrentLayout() = 2 then
+      			sBaseHTML = [
+      			<p style="font-size: 12px;">%1</p>
+      			]
+      			sFormatiingReduction = StringBuild(sBaseHTML, "EXCLU.")
+      		else
+      			sBaseHTML = [
+      			<p style="font-size: 16px;">%1</p>
+      			]	
+      			sFormatiingReduction = StringBuild(sBaseHTML, sReduction)
+      		end
+      		
+      		
+      		
+      	other case :
+      		if PageCurrentLayout() = 2 then
+      		sBaseHTML = [
+      			<p style="font-size: 20px;">%1</p>
+      		]
+      		else
+      			sBaseHTML = [
+      			<p style="font-size: 29px;">%1</p>
+      			]
+      			
+      		end
+      		sFormatiingReduction = StringBuild(sBaseHTML, sReduction)
+      		
+      end
+      
+      return sFormatiingReduction
+      
+     type : 458752
+   -
+     name : FormatPresentation
+     procedure_id : 1458396475300276347
+     type_code : 15
+     code : |1-
+      // Summary: Format the presentation of the sales for the display
+      // Syntax:
+      //[ <Result> = ] FormatPresentation (<sPresentation> is string)
+      //
+      // Parameters:
+      //	sPresentation (ANSI string): Raw presentation
+      // Return value:
+      // 	ANSI string: Presentation with HTML formatting for the display
+      
+      procedure FormatPresentation(local sPresentation is string)
+      
+      sFormattingPresentation is string
+      
+      for each string sLine of sPresentation SEPAREE by CR
+      	sFormattingPresentation += "<li>" + sLine + "</li>"
+      end
+      
+      return sFormattingPresentation 
+     type : 458752
+   -
+     name : FormatReducedPrice
+     internal_properties : CAAAAAgAAAAog3TST2yY+VZG6w0K+tseG5BcnFr/gR6cRhglbbiqF8JPgWR53vR9PHRWkDai5UogEAyl/pLZs8wI6U408PS5o1x6eoRWUyoaUv4ahL3WhZZ7UX21vqtIxOmUVss0Ti+7ehn7TIENtsgzbs1UqKHA3bu3epCFgKdQjYxeHQGvpm6gQornho1oHEkL0dS0lS3LkqVYy8A=
+     procedure_id : 1458396475300341883
+     type_code : 15
+     code : |1+
+      // Summary: Format the price, the price with reduction and the price before reduction: from $52 instead of $75 
+      // Syntax:
+      //[ <Result> = ] FormatReducedPrice (<cyPriceWithDiscount> is currency, <cyPriceBeforeDiscount> is currency)
+      //
+      // Parameters:
+      //	cyPriceWithDiscount (currency): Reduced price
+      //	cyPriceBeforeDiscount (currency): Price before discount
+      // Return value:
+      // 	variant: Prices with formatting
+      
+      procedure FormatReducedPrice(cyPriceWithDiscount is currency, cyPriceBeforeDiscount is currency)
+      
+      sBaseHTML is string = [
+      <p>
+      <span>
+      From &nbsp;
+      </span>
+      <span style="font-size: 24px;">
+      <span style="color: %1">
+      <strong>
+      $%2&nbsp;
+      </strong>
+      </span>
+      </span>
+      <span style="color: %1; vertical-align: super;">
+      /pers*
+      </span>
+      </p>
+      <div>
+      <span style="color: %3;">
+      instead of&nbsp;
+      </span>
+      <del>
+      <strong>
+      $%4
+      </strong>
+      </del>
+      </div>
+      ]
+      
+      sRGBDiscountPrice is string = StringBuild("rgb(%1,%2,%3)",RGBRed(ColorPalette(colorTextLink1,3)), RGBGreen(ColorPalette(colorTextLink1,3)), RGBBlue(ColorPalette(colorTextLink1,3)))
+      sRGBInsteadOf is string = StringBuild("rgb(%1,%2,%3)",RGBRed(ColorPalette(colorTextTitle,1)), RGBGreen(ColorPalette(colorTextTitle,1)), RGBBlue(ColorPalette(colorTextTitle,1)))
+      
+      return StringBuild(sBaseHTML, sRGBDiscountPrice, NumToString(cyPriceWithDiscount, ".0S"), sRGBInsteadOf, NumToString(cyPriceBeforeDiscount, ".0S"))
+      
+     type : 458752
+   -
+     name : FormatPreciseReducedPrice
+     internal_properties : CAAAAAgAAAAMt2jOcuDzQdrqF/UqhuuS5yRE7DrDJT4Q6jSF5Vy6q8ZT8ZRBsgAtkPgqGA5m1V6cLOw1Rt71U5hkbd5URPy91yh6Umxqn7pWHjogAjMcD4wR/zcTdBkm8p86tIlqNFl5qM8F+o9bBDbhXDvaVle6o4GFbJaDRl0Gs1LMCxf1KBTuKJwV9FtGIo8RFwqSS6bIlqFct9w=
+     procedure_id : 1458396475300407419
+     type_code : 15
+     code : |1+
+      // Summary: Format the precise price (and not a price "from")
+      // Syntax:
+      //[ <Result> = ] FormatPreciseReducedPrice (<cyPriceWithDiscount> is currency, <cyPriceBeforeDiscount> is currency)
+      //
+      // Parameters:
+      //	cyPriceWithDiscount (currency): Reduced price
+      //	cyPriceBeforeDiscount (currency): Price before discount
+      // Return value:
+      // 	variant: Formatted price
+      
+      procedure FormatPreciseReducedPrice(cyPriceWithDiscount is currency, cyPriceBeforeDiscount is currency)
+      
+      sBaseHTML is string = [
+      	<span style="font-size: 18px;">
+      	<span style="color: %1">
+      	$%2
+      	</span>
+      	</span>
+      	<span style="color: %1;">
+      	/pers
+      	</span>
+      	<span>
+      	instead of&nbsp;
+      	</span>
+      	<span style="color: %3;">
+      	<del>
+      	$%4
+      	</del>
+      	</span>
+      ]
+      
+      sRGBDiscountPrice is string = StringBuild("rgb(%1,%2,%3)",RGBRed(ColorPalette(colorTextLink1,3)), RGBGreen(ColorPalette(colorTextLink1,3)), RGBBlue(ColorPalette(colorTextLink1,3)))
+      sRGBInsteadOf is string = StringBuild("rgb(%1,%2,%3)",RGBRed(ColorPalette(colorTextTitle,1)), RGBGreen(ColorPalette(colorTextTitle,1)), RGBBlue(ColorPalette(colorTextTitle,1)))
+      
+      return StringBuild(sBaseHTML, sRGBDiscountPrice, NumToString(cyPriceWithDiscount, ".0S"), sRGBInsteadOf, NumToString(cyPriceBeforeDiscount,".0S"))
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1fbd04310d59067b
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

@@ -1,0 +1,361 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WW_Rewali
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : ""
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : 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
+ configurations :
+  -
+    name : Site
+    internal_properties : CAAAAAgAAADx6rXil9GoYh8pLeOaOBEU1fp88KaPatE6El8nPrDEFo7Y6xzGdmMnZiRutam8QEjkKd/WTilBs1C8ogrvjmXC85feUDidry42prf76u2qc/P3EG31Ia4d9ZINzihseqKi0tv0oSyrTPfVPGKMWcdN61NqOJnVviFNleoF4EOWh2kGSGLcYMcOWIVLPFuebNRZNzk+C82uMQqcQji74mAnPEi1Qh9vg4rymIXpN5DbWG72p51LdAqRXmzwE8EYWFpk7gCURRcUqh+GgCqCsw0psI+5G+6euvzHEHpCBe9APHTjb3O5bKikMqBVqn/M3lPpkCDoGStbmNOfCY08pIrXqsm+43jdi9gnlM0Yxlqw5Bry1scWhTHok0e7Q51yWSIjLoZbbnTyKaPgFyV4zODkZsW/J2xOj92dbPGlCZamsb4ETY6ZtqTzNeTGgxok8bSX5bDtdrAM/WKh+QZ4aN4kH0AQaLoTBUVRZil3jH1zPywAHRfzv6YbAtp2hf02ttyM4hcXSSY5zh5yac5hkyUVt8kmOQAQviCiUilfHQIxQ/CQiNXkJts8TZunI64jRNpeZDOGURbAuIyC63jmkh6j4ulmxHzwKpVEpPqzYC45Yb03a5iGLna4jCeQkKf4wxdbbIpF77Y7EaAJAEIhOOtggbTdAIS9jncAiTJ6v8B3CnqCODoJnE/J8EThqYcUCt+FCbszp/ybTxA7fG6L7V35I/EtlbRHTYnobzPfkbvFydo9BVDs19phzTPlwP3od+d0UEOdiIeX/fYVsy65R1PIUWckWrKSLaLyE5Ans4ssXf4zKjBqWxnp5ijKyLO5PpBGgEYPBczrYnr02bcbRVasSdBwet+0Yp9CLchkA59edz0LSR/QrBx0L7oESuSZ2epGTUr2jFRinMFFBEUS6YY6uixcpj5z32Lrng2dAKuT9/9TT+0a60ARfSP/uOqbvqCjPMNPmeJE/O0hHURs+OW4eB8ZefOgbHn65RweumgSILObxXIngYcA8gvvHBsHoSIn0+LVjWTNF5PNArAZl7xUgTueq49hYB03vmzif0MGu6xt5y9JN5/ClgGQo1w3CBekmuCQMU1uNYmnYM3q5PVDan+rEQxdGVxkdvsCqwcuQwTDmAvNIvJ4LqemYyMw04YkvZfOII1teA5AFz5l0UxLRqZXb2CnHl9OfaXY7ETH7zOnf+lG9LkAOw8lx5UdKZYS+vunXXA8zJYA+WR4gibolXUpAW0cvedZjq2+huASG0eKjpVfcD2eYxzuW/kCX8tzant9Lf8acJAbA+8+5yU3+k5+Qfu3+GcOaEZhNwnbeD4OAiJYdlkNQ2mZ02lj6fPavwGKoF8bv58fPpfWZr3wnozFwUy/OIfVYOWepF5zAKNyuZKgbcty/sJk2n61WrO7KEnZdIBHfQjJC+2uWyRHuNNcnaNCiEat1DYuB6BwXTBDdVcwgUJzWNgfIBUpwZaCxI3zWL7ULx9JRsnVqebaQDZsdtG2V1kRh2mVDNo53SNXRnE85DjPLZrX7xuXk/cp1ejW+3B/5QUOvWVQhVzqw13Af6G0ZNbv6GqgyF7CBAWW2T3JWUOoB1RD68nN764T/TnfnzNwPJvP3yJmqhcFxWs2YdziBE4UaPrG+v4ba5bbmqx0ghe2I7y03wwG9JczHh31hh8pgfz9R+ltLmKqjPQELzp+rO2f21so36ZzHRYXFTE3wGrspqL0ph1IkOT8bc3v2GOVwH9NKUIe8KLpwOlB7kliDlb/tt6n8e4xSV3q/EC7UFTqIsCDUAdXe24GdO6ZIVPM/tlQ6OikXlT1VXVvY1zKfhrR+ZsSB//VUdyixUdpT/zvNXe7zZcTA11+ETRIwjA/1YiHbXxyLLc1ICDVrKTxVz4XCC1ezBsBgOrdHagNPhKeox/1royKOofA19HxgFQTH0EXje2cNvve5BmAsPBIGPnbYmwt+29vGDw/ksAP3GizKRcI6Gvq15HxDeLUGkEx4s+O2M+xWBSx4SYDN16ZSNVHz3aTe+FMd4YiDayRQ42BP9p+fEp56MfMxCcLX3ovxd4ci//1QglyCYfYYjgEG6Ssuvfj6q8w94fFxG/TsGDSPE+YvvR5bF0nhnuSEMbrT5D8YHPWZkGK/t+DKxux3zLme8zGM9B51OpQP+c3hs11yYBEg2UP0PJ0MvRwiqo94MjmDXZkBifgRpdKHVFwVGyDrsNv6DFxaF+H7PpLiP0NBuQjzU3apud3Mg7EvxMJ3LxKEsfqgvnPAH/W8C0Jx4XTOvPh2ldqUxBGZRVVOWTRsvHjbr/gplUqLMVBs8pzWDpRTHb5/KkeQ3c2vVxdBDi02+lZH3ynF/fvq1aSv9uhDh0TZiUP4J3j0q6kw8pskgxVFqY6n4h8LKbEo5cKVtze/UTKiNMIHyW5uKf3mDwptvNq9QSlECWnb7bM4GCcrzrbOL4HIBh2T3Pv8k0wsbn0o434JExclxdThdeqoi5j8foiZUItnidVW06drdGv9VjTFzFWa97bpat8VGhxqk02U42tL3hfijAnBxvohxyXU3hZyY7MyfO9ooGlaSpHDq1oxVTeaTiLl2T6VgAJMG7TwIE29LuyuYxtlHbpkdM9csEuAWgeA8b/BbM741Z8u5+emJ/v5YjRIX6PoHDinusfPCvYDly7LANVzgWpw2GZPHhlwwRhcXKkDm0Ji/DiBQyKRAqq9MGdbW+KCGiyBRy+RibxpPNuddAllMdTcafYf5KiOF2CQTbiiqVL2a9m7eYFKNW55JZTWN53P+fn1msgIcgKNrOwhi71A0flROycMG/+ffOGIJ85l/KgDkB3TmvHfRJboHHIzik7cyB8nCLQa0SI/VfA1ei2tTMXuJpRWFdHNly0qp6c+eeMhOvq+6QpJcQcSMLVWUvEH4se3c4HDfJ7+J/AVVKQj1eZusZiB8aAvY9wVfjW08yatuYpurmJ464U0FdfmuNWAAwmIqDwBU1Ikl87SqIqIO2hVoybYE2pH0XpOsVKRNuTjR1G9yWM47Sb+M2n112sNMMes/If4r/YTUxekTEnBKO9kcRAGegbKuC67TbaQP6UmNyc/rtPfL0Eeq8D4eXDaO0gESvxEBATAY9d1EZtn+x4fBvAQbuCrbHn6Eh8MuWJPRTRjEuX0HhLfoHRaeTenNibqdedxOjvO6AvRnTwn7Gh/DXUnRoQZ1GyJxLJAWgvaUDz4nJBBhVOOSuEa2ak8ury4q3v3q8ptU187zSb8nmiazbpGoIOcdSRRjTfPwStRxdSATZgzQZKT9Oz25B0GAzg+LDfuumgVjoIEUcsAyUJaKlYEZ+F2kczbIIXVWMopow2m580DY3YobiAzi6iMCi151moYyqZaRXpvlMQ01U42yUuhyQnbP7yayPcKnBc3jJsbysSD+Dgp7ihAXnt+Qio1Bl6+ZdXhSssg8YUE4DWL+RxhtJR2JsWAzWnEyfbQbZdSMuwxdF7IsTeBIaWzDqgNHeIh7bn2cF8nR5E34laBzLtYo6plocaX1ERiV/LSTRTfvRxWli01Vfw/vEfDxYcPMUVeMkMyOiueTkeZTjRGNtrlFI8v3QS6zNSbmp9W/OPpuwi+//6owF6CHuFYYrJdz9J2B5O9rqT2G1lLDHWufpyX9uvCAmd6hiKYuJJNQWS1Z2srYIvuqHiAHvQkl3sIFSf1nh28DDpSH2Ig2KT4qG1shniV0DZwiCDuSn2trgRxAn0eYFb3Ixwalp/jzXINGhdoGtwQAHD+rkJQNy9EBFYef9RwKLrsFuzCdbmdGbOzU28mZNRNG4s2pg9dWcHibsywSgDo4KuffrUL7w+x7xbRGFJqiQOG1l+4vbUUs6LVsUxPsaP2sibd6q/Z+7tPzV51J7wEuhM36onBjucsSrB0p29gKroAWBCAqhi1g==
+    configuration_id : 11622113350548155514
+    type : 2
+    generation_name : WW_Rewali.wdl
+    version :
+     major_version : 28
+     minor_version : 75
+     internal_generation_version : 11
+    index_page_generation_name : index
+    language : 2
+    64bits : true
+ elements :
+  identifier : 0x441950790002ad02
+  elements :
+   -
+     name : TPLC_ScrollingBannerContent
+     identifier : 0x481b115e007c1b22
+     internal_properties : CAAAAAgAAABv60dbaBUdzp08li/WfcEa7bjk5OhDsjlVsNK7k4wOynb6ylEo2LZXumBapm5iHpJ6+g==
+     physical_name : .\TPLC_ScrollingBannerContent.wwt
+     type : 65543
+   -
+     name : form_product
+     identifier : 0x45dae4dd00242f5b
+     internal_properties : CAAAAAgAAAAP0PQz6DKsh5353AsH41suDbYWOwLLRZjSCXb+JYLqMxOcFfg5UK0Q821GoRUuMsnhWa+vUUb58OF/lQS0u6JZAYNNsUM=
+     physical_name : .\form_product.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : QRY_SalesOffers
+     identifier : 0x4613cf4a00292a86
+     internal_properties : CAAAAAgAAADHQy9zsO3F5vN0+M8a3rhWQXA4cDU67oVW/bCT3qZsnKxEfC74wLp5kIhyTtYK9urSUg==
+     physical_name : .\QRY_SalesOffers.WDR
+     type : 5
+   -
+     name : booking
+     identifier : 0x4614e25d00305c93
+     internal_properties : CAAAAAgAAAAtFFdq1CT9ISY+c1snQu8aHedI4TtfiKmsbzyBb+ldKsiMF/2e7EVfVNCLx3VwImRBVp9qnCGCpeZVwWmBY1LdGq8e1Q==
+     physical_name : .\booking.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : QRY_OfferDurations
+     identifier : 0x46338ad600b8b834
+     internal_properties : CAAAAAgAAAAwDmi0cyiAm6YHEpZXKks1AkMJUfhNdr52BbNI+4kDBQcPZVNknFoIAzulE5NNNasVHQ==
+     physical_name : .\QRY_OfferDurations.WDR
+     type : 5
+   -
+     name : QRY_PossibleDepartures
+     identifier : 0x4633ad3e00351db8
+     internal_properties : CAAAAAgAAAAQ7khUUwggO4YnVaJ9vdTR8lUxYeoPeRN2SVIxmvqaBuI4XDHzDRGo41tFs3NtFYt1/Q==
+     physical_name : .\QRY_PossibleDepartures.WDR
+     type : 5
+   -
+     name : index
+     identifier : 0x4640740c00bb5114
+     internal_properties : CAAAAAgAAADTRmWYquoz52R8LQmp0B2w+zkuz5H91hdbH6/Jhz9XTgqSHEajCzrmpicIYc8WhMonvHUE9o/0FxQDf6vDIRwryN3Mpw==
+     physical_name : .\index.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : booking_validation
+     identifier : 0x464072f600b913ff
+     internal_properties : CAAAAAgAAADbrNiP5J5Y06k14D8b518iAZryn2aPPuMl/EQJ42LfqU4OkqfzXpjxPjeYGYPy7gW9vQvDTUL99OVzmTjgb3at9f8xXZc=
+     physical_name : .\booking_validation.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : registration
+     identifier : 0x464da57400fdac86
+     internal_properties : CAAAAAgAAADOmc2Y16s1+kCceZaivpL1xF8/cDlspJgQTccAD5LwsLHowBoGj+X5JU5LJpAZyWIYENaIig3COzwaMKEJVgnC6OokaoQ=
+     physical_name : .\registration.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : orders
+     identifier : 0x464de77001586eca
+     internal_properties : CAAAAAgAAAB8D79uTXHrQN7Cj/jYoOCbij2ZrpdaUJsP9gusc1RMX07OCkopAV+xlW5TfMjXw1hu7jQq1Pu0LSIwxstz/OMYXmCS/PY=
+     physical_name : .\orders.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : coordinates
+     identifier : 0x464de6d301560aca
+     internal_properties : CAAAAAgAAABQI0tisQXfRNLGm/TEXDxXJvnNesMGyp5PAstsIzWpZ3gyYnbT+2hHf+jRXtZrd4wiGujmKK9gWR480sd3+O8kSlSe4BI=
+     physical_name : .\coordinates.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : PAGETPL_Products
+     identifier : 0x4655bc270083faac
+     internal_properties : CAAAAAgAAAAvKwcbqNVdDtuuqRw8knYu66rSyvIEr0pDIwDOw3weymLy2CJipnF7eKAa5q4i3tI6Og==
+     physical_name : .\PAGETPL_Products.wwt
+     type : 65541
+   -
+     name : PAGETPL_General
+     identifier : 0x46406f7300b75c37
+     internal_properties : CAAAAAgAAAD+ZNbK+aYOIShqk9ePES1y4tVB4e0oX5yt5q7nyXYekmZE99XdY6CXibErlR3TryHraw==
+     physical_name : .\PAGETPL_General.wwt
+     type : 65541
+   -
+     name : general_sales_conditions
+     identifier : 0x465c7ed1016cdbdb
+     internal_properties : CAAAAAgAAACivek868+pjtTAleLOWj5BIPvTfMVoJ7MEnVoLFZqQDAcysjcmqInSM0zZ2EYVzWYcHOrkLqFeVxgmzM19wqVeBI5ATqA=
+     physical_name : .\general_sales_conditions.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : reinit_password
+     identifier : 0x465d80e302c25dbe
+     internal_properties : CAAAAAgAAADp6pLdiuyOIT/jrtn5QQV4d9C09UTt9CMc9x0whzVjuI6LbxjpjGccCPE20WFQSOObk1EN95hXTgNR5+pSHcB7I61nl2k=
+     physical_name : .\reinit_password.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : validated_order
+     identifier : 0x467969e1021cd546
+     internal_properties : CAAAAAgAAAD3cjncbq53a5HQl8k2a87yxLcSFRTsqDyRn5mkpw2MkuJiUlRVItH1apMI75D9GE3Uf4hS5BDQLpleGtc33dhnhBH4iw==
+     physical_name : .\validated_order.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : QRY_CustomerOrders
+     identifier : 0x468bcaab0283f013
+     internal_properties : CAAAAAgAAACJhfGVEk/niFFOMeY00KJrdxCiMoVSwuS21eEaI3ElK9FfltqmHG8P8iqUbDSsVESMlA==
+     physical_name : .\QRY_CustomerOrders.WDR
+     type : 5
+   -
+     name : QRY_CurrentSales
+     identifier : 0x468e3b3503209303
+     internal_properties : CAAAAAgAAAB10V1BfttTDMW1DGIHJ7mj++6K4lvAEuZSiizfXgaMXJBM1T7XNPFmpp4Y4KBQKJhg4A==
+     physical_name : .\QRY_CurrentSales.WDR
+     type : 5
+   -
+     name : COL_Tools
+     identifier : 0x468e3491031e9ff2
+     internal_properties : CAAAAAgAAAAlIQ0RrstjfPWlFQJ5f6H23UzEnEw+FyOf/yzQHeIo6CjoxNtAu1aWlo4I8LAg2MgwMA==
+     physical_name : .\COL_Tools.wdg
+     type : 7
+   -
+     name : COL_CustomerAccounts
+     identifier : 0x4696629902e3761d
+     internal_properties : CAAAAAgAAAD/W9fL+KUNHiv/qUyuKvSlA0LawvmA0chOSx6HGgSWQvoK0ZVD/+oEiLAqlh7SriLqag==
+     physical_name : .\COL_CustomerAccounts.wdg
+     type : 7
+   -
+     name : SET_ECommerce
+     identifier : 0x469662aa02e5b7ab
+     internal_properties : CAAAAAgAAAAMCmSwjzR8r7p+JBS1g7wCmv/pSfZgTcVO6zLXW9NBrw3hij2rF3OPBz+5B49BOa8ZGQ==
+     physical_name : .\SET_ECommerce.wdg
+     type : 7
+   -
+     name : PAGETPL_Login
+     identifier : 0x4696698c0afa98c5
+     internal_properties : CAAAAAgAAAAoJhAMu+DI056ij8ZvOg1UPn1FnS1wRA+NHgxBD+A8xDy2M1WgamLzu2NdW9sV7eMtNQ==
+     physical_name : .\PAGETPL_Login.wwt
+     type : 65541
+   -
+     name : sales
+     identifier : 0x481b0fcc007af8a3
+     internal_properties : CAAAAAgAAAA6xWEEUyexZvwY/Womgsa5qBN7NH0QxoLx7Eg/IvOboy8Ry5PkS8Fpw8pHqBCdhZ7UVJJMttmWD8CetCWV2o1GbHa4xjg=
+     physical_name : .\sales.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : QRY_Order
+     identifier : 0x46797f900226893c
+     internal_properties : CAAAAAgAAAAQ7khUUwggO4Zty3iLCuzxel/JaewRzgWyspmqEXMhj21B+x73w93241tFs3NtFYt1/Q==
+     physical_name : .\QRY_Order.WDR
+     type : 5
+  other_elements : []
+  analysis : .\WW_Rewali.ana\WW_Rewali.wda
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components :
+   -
+     physical_name : .\Paypal\Paypal.wci
+ common_generation_directory : true
+ wb_skin : 170 Elegant
+ wb_color_palette : Palabra & Light
+ languages :
+  - en-GB
+ wd_style_sheet : .\privatetravel.sty
+ site_map :
+  roots : []
+  orphans :
+   -
+     name : PAGE_erreur
+     parameters : []
+     title :
+      fr-FR : Erreur interne au site
+      en-GB : index
+     description :
+      fr-FR : Erreur interne au site
+      en-GB : index
+   -
+     name : booking
+     parameters : []
+     title :
+      fr-FR : réservation
+      en-GB : registration2
+     description :
+      fr-FR : réservation
+      en-GB : registration2
+   -
+     name : booking_validation
+     parameters : []
+     title :
+      fr-FR : Validation réservation
+      en-GB : Booking validation
+     description :
+      fr-FR : Validation réservation
+      en-GB : Booking validation
+   -
+     name : coordinates
+     parameters : []
+     title : {}
+     description : {}
+   -
+     name : form_product
+     parameters : []
+     title :
+      fr-FR : Fiche Produit
+      en-GB : Product form
+     description :
+      fr-FR : Fiche Produit
+      en-GB : Product form
+   -
+     name : general_sales_conditions
+     parameters : []
+     title : {}
+     description : {}
+   -
+     name : index
+     parameters : []
+     title :
+      fr-FR : index
+      en-GB : Internal site error
+     description :
+      fr-FR : index
+      en-GB : Internal site error
+   -
+     name : orders
+     parameters : []
+     title : {}
+     description : {}
+   -
+     name : registration
+     parameters : []
+     title :
+      fr-FR : inscription2
+      en-GB : booking
+     description :
+      fr-FR : inscription2
+      en-GB : booking
+   -
+     name : reinit_password
+     parameters : []
+     title :
+      fr-FR : reinit_motdepasse
+      en-GB : reinit_password
+     description :
+      fr-FR : reinit_motdepasse
+      en-GB : reinit_password
+   -
+     name : sales
+     parameters : []
+     title :
+      fr-FR : "Rewali : des voyages de prestige, à des prix irrésistibles"
+      en-GB : "Rewali: luxury travel, irresistible prices"
+     description :
+      fr-FR : "Rewali : des voyages de prestige, à des prix irrésistibles"
+      en-GB : "Rewali: luxury travel, irresistible prices"
+   -
+     name : validated_order
+     parameters : []
+     title :
+      fr-FR : commande_validee
+      en-GB : validated_order
+     description :
+      fr-FR : commande_validee
+      en-GB : validated_order
+ url_rewriting :
+  internal_properties : CAAAAAgAAADkPzcUdUUS7wCiun+MCjqYH70RJdzkSv/nRvXZ3ENdikMa6bcHtsAH
+ code_elements :
+  internal_properties : CAAAAAgAAABxBrE+WC0s4WwGYi6vHknm/JedKzAF/qLaFhMWtv8Y33WNSRR5fP3SvSnAUu4yfGDpn/pN9k93nhtZ3I8bHFkk9h+qaQQ76nMZ
+  type_code : 0
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAABRIzR+F2XFFlHqZyiEzz5/GWverDa3V1MxWPPe6GUpYRsOQGA9Wr3hconfVvTK0/ypXKgUJmrdIfkI8ySZp1MvBm6fwrI/37EDnU1bp2F1fexWL3Yr8hGgU5Mgu9gwkLvKVkrQD93flVp8rfY=
+     code : |1+
+      constant
+      	KEY_GOOGLE = ""
+      	ACCOUNT_PAYPAL = ""
+      end
+      
+      
+      //Administrative cost
+      gcyFees is currency = 15
+      
+      //
+      // START IN PAYPAL TEST MODE
+      // - to actually perform the payments, run EnableTestMode() with <bTestMode> set to False: PayPal.EnableTestMode(False)
+      // - don't forget to specify your user account (your email address): PayPal.PayPalUserAccount("email@domain.com")
+      PayPalUserAccount(ACCOUNT_PAYPAL)
+      EnableTestMode(True)
+      
+      MapLicenseGgl(KEY_GOOGLE)
+      
+     type : 196608
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : Site
+     identifier : 0x441950790003ad5f
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : voyageprive
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==

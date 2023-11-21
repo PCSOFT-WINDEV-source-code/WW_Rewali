@@ -1,0 +1,321 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : SET_ECommerce
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x143d43dd0bdc63d7
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAAB5afPbAmTA9D9JHixks8a9zGjDb8R1DLXDXri/F+vyQfdq2fH2+rBN8D0UEAeSMxWT2p/F9hyqn//28BzRLOLj2eb8BH+MzTiTqLD53yOMuT33Op1D450brpUnggUrr2ywbriuDg/z9/XM6DoWvWge8FvvDJB+LVQDvyRLvqfzpDvanCC+6FC6O33gOpbmKRIC7zU+K6T5zhtKH2rTx3FsmKk1qA93NfdxcnxyjhGhUFNVICOvXk4YhlXNZtsjNnU2/TKV82nH8IjaAlaZHM1novgdt0SyJB4FNNhlx4KBpyTUiFrokNjDHKDGN3Il7QLnUH4TX9sgdiokzojYEgzyb9px21Dq+sCA97eMOkb2dQ==
+  type_code : 31
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAAD70jq0XwkGPSGisxW+nrbbuoSqYD2Nxh2jCBIEwH+bx9C9kbkmHRNflFcEBTciKcbnYwlPChtYq3rbayyFue92hlrcRtXytMaub6n4YMC7gnwhQIS+4uRz5i9aliok9wnO8kVNB7Ki+Q/xz+RB1A5a8SikZLabmIhhCoaviz109w==
+     code : |1-
+      // The set of procedures named COL_EBusiness is used to manage an e-commerce site
+      // It uses the following analysis files:
+      // - Customer: file of customer accounts
+      // - Address: file of active addresses for the customers
+      // - Orders: file of orders placed on the site
+      // - OrdLine: file of order details
+      // - ArchiveAddress: file of addresses used in the orders, in addition only
+      // - Product: file of products
+      // - ProductFamily: file of product families
+      // - ProductPhoto: file of product photos
+      // - TaxRate: file of tax rates
+      
+      
+      // Constants 
+      constant
+      	// Types of payments (used in the Orders.PaymentType item)
+      	//	PAY_CC = 1				// Payment by credit card
+      	PAYM_PAYPAL = 2			// Payment by PayPal
+      	//	PAY_WIRE = 3		// Payment by bank wire
+      	//	PAY_CHECK = 4			// Payment by check
+      	
+      	// States of an order (used in the Orders.OrderStatus item)
+      	ORD_WAITINGFORPAYMENT = 1		// Order waiting for payment
+      	ORD_PAID = 2					// Order paid
+      	
+      end
+      
+      
+      gnOrderID is 8-byte int			// Order currently created
+      
+      gsOrderConfirmationEmail is string = "orderservice"	// Sender address of the emails for order confirmation
+      
+      
+      // The name of the site is a string used in the messages or emails sent from the site
+      // Its default value is the deployment name of the site but any value can be used
+      gsSiteName is string = ProjectInfo(piNameDeployedSite)
+     type : 720896
+  procedures :
+   -
+     name : CurrencyToString
+     procedure_id : 1458396471003800535
+     type_code : 15
+     code : |1+
+      // Summary: Returns the currency that will be displayed
+      // Syntax:
+      //[ <Result> = ] CurrencyToString (<cuValue> is currency)
+      //
+      // Parameters:
+      //	cyValue (currency): <specify the role of cyValue>
+      // Return value:
+      // 	ANSI string: Currency formatted for the display
+      
+      procedure CurrencyToString( local cyValue is currency)
+      
+      return NumToString(cyValue, maskSystemCurrency)
+      
+     type : 458752
+   -
+     name : OrderPaymentToString
+     internal_properties : CAAAAAgAAADoOcLgd1ngocVZtc5/eTt6Kj+5Z6i6c8GvbsdNTphosXnXJ54jVImNG4BDq6DZnXIIa8u4lZX2zsznM7H1LEfJ76+AuMQoGAxCuIgVmBuvNppqz/k8EQIGPA2FsC8K0ntYKE4KF4OzfV9l7sL73A==
+     procedure_id : 1458396471003866071
+     type_code : 15
+     code : |1-
+      // Summary: Used to retrieve the payment in letters from its value
+      // Syntax:
+      //[ <Result> = ] OrderPaymentToString (<nPaymentType>)
+      //
+      // Parameters:
+      //	nPaymentType: Payment code
+      // Return value:
+      // 	string: Payment in natural language
+      
+      procedure OrderPaymentToString(nPaymentType)
+      
+      sPaymentType is string
+      
+      switch nPaymentType 
+      //	CASE PAY_CC
+      //		sPaymentType = "CC"
+      //	CASE PAY_CHECK
+      //		sPaymentType = "Check"
+      //	CASE PAY_WIRE
+      //		sPaymentType = "Bank wire"
+      	case PAYM_PAYPAL
+      		sPaymentType = "Paypal"
+      	other case
+      		dbgAssert(False,"Unable to find the payment method")
+      		sPaymentType = "<Unknown >"				
+      end
+      
+      
+      return sPaymentType
+     type : 458752
+   -
+     name : OrderStatusToString
+     internal_properties : CAAAAAgAAADaa9TV5flAufHFM7iF5fMiZuuFqyLOU+Fj2vX7kEC0VWXbD04ZvO0hD3TlwSppZRoYu4eMe1UK8a0YZgbGPbKm+LCRpwn99SsP5aMCiRyKA8fXPAit+gvR9XZkWVgT8ZRx+d+hKLQERPBm4NDJ7g==
+     procedure_id : 1458396471003931607
+     type_code : 15
+     code : |1-
+      // Summary: Used to retrieve the order status in letters
+      // Syntax:
+      //[ <Result> = ] OrderStatusToString (<nOrderStatus>)
+      //
+      // Parameters:
+      //	nOrderStatus: Code for order status
+      // Return value:
+      // 	string: Order status in natural language
+      
+      procedure OrderStatusToString(nOrderStatus)
+      
+      sStatus is string
+      
+      switch nOrderStatus
+      
+      	case ORD_WAITINGFORPAYMENT // Order waiting for payment
+      		sStatus = "Waiting for payment"
+      	case ORD_PAID // Order paid
+      		sStatus = "Paid"
+      	other case
+      		sStatus = "<Unknown >"		
+      end
+      
+      
+      return sStatus
+     type : 458752
+   -
+     name : OrderCreate
+     internal_properties : CAAAAAgAAAB2z+fXmdREpUITjMLq/olOBbK5XWEcSnEVXTDF4qRVKyDZNLe7mhwn/EfaeuSKhQzaL+TlxNaSnt4jrQBlMOprAw1x7UY3SsInENyNR2mEFO6iwhhyaD/u/C5kucm2YX9tGo2GwnUElMyPzCY0DRyqhaMBp+GlqJ8IlV0/lNvKn4Fx881uGOTnGKOyCgQAGdo=
+     procedure_id : 1458396471003997143
+     type_code : 15
+     code : |1-
+      // Summary: Creates a new order with a sequential number per day
+      // Syntax:
+      //[ <Result> = ] OrderCreate ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	string: Order number 
+      
+      procedure ordercreate()
+      
+      // The generated numbers have the following format:
+      // OF01-YYYYMMDD-seqnum
+      // OF01: order forms of the Web site
+      // YYYYMMDDHHMMSS: creation date of order form
+      // seqnum: sequential number of the OF
+      
+      // Try to position on today's record and to lock it
+      while HReadSeekFirst(OrderNum,OrderDate,DateSys(),hLockWrite)=False
+      	// If no record was found, add it
+      	if HFound()=False then
+      		OrderNum.OrderDate = DateSys() 
+      		OrderNum.Number = 0
+      		HAdd(OrderNum)
+      	else
+      		// Record found but unable to lock
+      		if HErrorLock() then
+      			continue
+      		else
+      			// Other error
+      			return ""
+      		end
+      	end
+      end
+      
+      // Reads the sequence number, increments it and updates the file
+      nSequenceNum is int = OrderNum.Number + 1
+      OrderNum.Number++
+      if HModify(OrderNum)=False then
+      	return ""
+      end
+      
+      // Generates the OF number
+      sOrderNum is string = "BC01-"+ DateSys() + Now() + NumToString(nSequenceNum,"08d")
+      
+      // Creates the order record
+      HReset(orders)
+      Orders.OrderNum = sOrderNum
+      Orders.InvoiceNum = Null
+      Orders.InvoicingAddressID = Null
+      Orders.OrderDate = DateSys() + Now()
+      Orders.OrderStatus = ORD_WAITINGFORPAYMENT
+      if HAdd(orders)=False then
+      	// The addition failed
+      	sOrderNum = ""
+      end
+      
+      return sOrderNum
+      
+      end:
+      // In all cases, unlock the counter of numbers
+      HUnlockRecNum(OrderNum,hRecNumCurrent)
+     type : 458752
+   -
+     name : OrderDefaultConfirmationEmail
+     internal_properties : CAAAAAgAAAAgszqkMr6DsddhaXnzuv/eFR370LOmHPWLhme8iz6GpkjzsA/RN8WPHpffwPUAUs6AHrhpy1VcF8eoucmQ9k6jx1MQzethXVqbLUhMPaEZiYr1PpiYdwTB0g8SHl189Ho/taEOQAqpI5igDxc2/sTiLguwNO0Q+htBEQACJ4ajJULxqmPCu17f5MEl1LsdRw==
+     procedure_id : 1458396471004062679
+     type_code : 15
+     code : |1-
+      // Summary: Default procedure used to send the email for order confirmation
+      // Syntax:
+      //OrderDefaultConfirmationEmail (<nOrderID> is 8-byte int [, <nPaymentMode> is int])
+      //
+      procedure OrderDefaultConfirmationEmail( nOrderID is 8-byte int , nPaymentMode is int = PAYM_PAYPAL )
+      
+      // Switches the time-out to 3 seconds (the SMTP server is on localhost therefore there is a problem if it takes more than 3 seconds to respond)
+      EmailSetTimeOut(3)
+      
+      // Build the email
+      Email.Subject = StringBuild("Confirmation of your order %1",gsSiteName)
+      Email.Sender = gsOrderConfirmationEmail
+      Email.NbRecipient = 1
+      
+      HReadSeekFirst(customer,CustomerID,COL_CustomerAccounts.nCurrentCustomer())
+      Email.Recipient[1] = customer.eMail
+      
+      HReadSeekFirst(orders,OrderID,nOrderID)
+      switch nPaymentMode
+      	case PAYM_PAYPAL
+      		Email.Message = StringBuild(<§@1e0c492300017dcb0004§>,gsSiteName,CurrencyToString(Orders.TotalIOT),Orders.OrderNum)
+      end
+      
+      // Send the message
+      if EmailStartSMTPSession(COL_CustomerAccounts.gsSMTPLogin,COL_CustomerAccounts.gsSMTPPassword,COL_CustomerAccounts.gsSMTPServer,COL_CustomerAccounts.gnSMTPPort) then
+      	EmailSendMessage(COL_CustomerAccounts.gsSMTPLogin)
+      	EmailCloseSession(COL_CustomerAccounts.gsSMTPLogin)
+      end
+     type : 458752
+   -
+     name : OrderModifyStatus
+     procedure_id : 1458396471004128215
+     type_code : 15
+     code : |1-
+      // Summary: Used to modify the order status
+      // Syntax:
+      //[ <Result> = ] OrderModifyStatus (<nStatus>)
+      //
+      // Parameters:
+      //	nStatus: New status of the order
+      // Return value:
+      // 	boolean: True if the modification was successful, False otherwise
+      //
+      procedure OrderModifyStatus(nStatus)
+      
+      // If the new status does not belong to the list of constants
+      if not nStatus in (ORD_WAITINGFORPAYMENT, ORD_PAID) then
+      	return False
+      end
+      
+      
+      HReadSeekFirst(orders,OrderID,gnOrderID)
+      if HFound(orders) = False then
+      	dbgAssert(False,"Unable to find the order related to this payment")
+      	return False
+      end
+      
+      // Modifies the status of the order
+      Orders.OrderStatus = nStatus
+      
+      return HModify(orders)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1e0c492300017dcb
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : "Your payment will be performed by bank card.\r\n\r\nClick the \"Validate the payment by Bank Card\" button to be redirected to the site for secure payment.\r\n\r\nAfter the payment, a page for order confirmation will be displayed and a confirmation email will be automatically sent."
+     index : 0
+   -
+     text :
+      en-GB : "You have chosen to pay via PayPal.\r\n\r\nClick the \"Validate the payment by PayPal\" button to be redirected to the PayPal site.\r\n\r\nAfter the payment, a page for order confirmation will be displayed and a confirmation email will be automatically sent."
+     index : 1
+   -
+     text :
+      en-GB : "Your payment will be performed by bank wire. To do so, use the bank details below (and don't forget to specify to your bank to perform an \"OUR wire\" if your payment is performed from a foreign country).\r\n\r\nThis information will be summarized in your confirmation email.\r\nIn the wire object, don't forget to specify the order number.\r\n\r\nBank code: 30047\r\nDesk code: 14121\r\nAccount number: 00037236001\r\nKey: 53\r\nDomiciliation: CIC Nantes-Sud\r\n\r\nAdditional information for OUR wires:\r\nIBAN: FR76 3004 7141 2100 0372 3600 153\r\nSwift: CMCIFRPP\r\n\r\nYour order will be processed by our services once when your payment is processed on our account. Your order will be automatically canceled if your payment is not performed within 10 days."
+     index : 2
+   -
+     text :
+      en-GB : "Your payment will be performed by check.\r\n\r\nYour check must be payable to the xxx company (don't forget to write the order number on the back of your check) and it must be sent to:\r\n\r\nxxx - Order Department\r\nyyyy Avenue\r\n34000 MONTPELLIER\r\n\r\nYour check will be processed by our services as soon as possible.\r\n\r\nYour order will be automatically canceled if your payment is not received within 10 days.\r\n"
+     index : 3
+   -
+     text :
+      en-GB : "Hello,\r\n\r\nThank you for your order (order %3 for a total amount of %2 Euros) on the %1 site.\r\nYour payment was validated and your order will now be processed.\r\n\r\nBest regards,\r\nOrders Department"
+     index : 4
+   -
+     text :
+      en-GB : "Hello,\r\n\r\nThank you for your order on the %1 site.\r\nYou've chosen to pay by check.\r\n\r\nYour check must be payable to the xxx company (don't forget to write the order number (%3) on the back of your check) and it must be sent to:\r\n\r\nxxx - Orders Department\r\nyyyy Avenue\r\n34000 MONTPELLIER\r\n\r\nYour check will be processed by our services as soon as possible.\r\n\r\nYour order will be automatically canceled if your payment has not been received by us within 10 days.\r\n\r\nBest regards,\r\nOrders Department"
+     index : 5
+   -
+     text :
+      en-GB : "Hello,\r\n\r\nThank you for your order on the %1 site.\r\n\r\nYour payment will be performed by bank wire.\r\nWe invite that you use the bank details below (by specifying to your bank to perform an \"OUR bank wire\" if your payment is performed from the Overseas Departments and Territories or from a foreign country).\r\n\r\nDon't forget to specify the order number (%3).\r\nTotal amount of the order: %2 Euros.\r\n\r\nBank code: 30047\r\nDesk code: 14121\r\nAccount number: 00037236001\r\nKey: 53\r\nPaying bank: CIC Nantes-South\r\n\r\nAddition information for OUR bank wires:\r\nIBAN: FR76 3004 7141 2100 0372 3600 153\r\nSwift: CMCIFRPP\r\n\r\nYour order will be processed by our services as soon as the total amount of the order is credited on our account. Your order will be automatically canceled if your payment is not received within 10 days.\r\n\r\nBest regards,\r\nThe orders department"
+     index : 6
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

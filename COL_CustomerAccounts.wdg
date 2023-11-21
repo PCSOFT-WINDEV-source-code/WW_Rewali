@@ -1,0 +1,500 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_CustomerAccounts
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x143d43dc0bc061b4
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAABasUulqc6u1vLO1b2ayOjWhLgAJ6cUQG0OVw+evu1u02sebURetTW8n64TsrKBbZZ9SjpaGzo65fDpn6nA9u+LUfb4/Lb1osPrgi4O6p4lxg==
+  type_code : 31
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAACBc0TPU7RpRhEaV1jEz85fmatunFY3xzPh2FOemLVp8Wv+YICNKr3RUhkPRlRqIxypnFhEZsqVSVHA69yRr1v3nlZXugrn91l7VYVz/wk9RYSeh05j+imoKyu4ExD4uGOi/mIoR9EU5OrMfSY=
+     code : |1+
+      constant
+      	// Options of DisplayableAddress
+      	ADDR_ACTIVE = 0
+      	ADDR_ARCHIVE = 1
+      	PWD_NOT_DEFINED = "Unchanged"
+      	
+      	COOKIE_EMAIL = "REWALI_CUSTOMER_EMAIL"
+      	COOKIE_password =  "REWALI_CUSTOMER_PASSWORD"
+      end
+      
+      
+      STCustomer is Structure
+      	CustomerID is int
+      	eMail is string
+      	Gender is int
+      	Name is string
+      	FirstName is string
+      	HomePhone is string
+      	CellPhone is string
+      	CreationDate is date
+      end
+      
+      
+      gbInitializedCustomerAccounts is boolean = False
+      
+      
+      gbActivationByEmail is boolean = True			// True if the user accounts are inactive when they are created and if they must be enabled by email
+      
+      // Parameters for sending messages
+      gsSMTPLogin is string = ""
+      gsSMTPPassword is string = "" 
+      gsSMTPServer is string = "localhost"
+      gnSMTPPort is string = 25
+      gsEmailActivationSender is string = "activation"
+      gsEmailTechnicalSupport is string = "assistance"
+      
+      // The name of the site is a string used in the messages or emails sent from the site
+      // Its default value is the deployment name of the site but any value can be used
+      gsSiteName is string = ProjectInfo(piNameDeployedSite)
+      
+      private
+      gnCurrentCustomer is 8-byte int	// CustomerID of the connected customer (0 if no connected customer)
+      
+     type : 720896
+  procedures :
+   -
+     name : bConnected
+     procedure_id : 1458396466706997684
+     type_code : 15
+     code : |1+
+      // Summary: Connects a customer
+      // Syntax:
+      //[ <Result> = ] bConnect (<sIdentifier> is string, <sPassword> is string)
+      //
+      // Parameters:
+      //	sIdentifier (string): Connection identifier
+      //	sPassword (string): Connection password
+      // Return value:
+      // 	boolean: True if the connection is established, False otherwise
+      
+      procedure bConnected( sIdentifier is string, sPassword is string )
+      
+      // The identifier can be an email or a display name
+      if HReadSeekFirst(customer,eMail,sIdentifier) = False then
+      	// Unknown user
+      	return False
+      end
+      
+      // The user was found, his password must be checked
+      if customer.Password <> sPassword then
+      	// Wrong password
+      	return False
+      end
+      
+      // The password is valid, connect the user by copying his identifier into the component variable
+      gnCurrentCustomer = customer.CustomerID
+      
+      return True
+      
+      
+     type : 458752
+   -
+     name : bIsConnected
+     procedure_id : 1458396466707063220
+     type_code : 15
+     code : |1-
+      // Summary: Indicates whether the user is connected to the site
+      // Syntax:
+      //[ <Result> = ] bIsConnected ()
+      //
+      // Return value:
+      // 	boolean: True if the user is connected to the site
+      //
+      procedure bIsConnected()
+      
+      return (gnCurrentCustomer<>0)
+     type : 458752
+   -
+     name : Disconnect
+     internal_properties : CAAAAAgAAACyU2x9rFVIgfUhDRbnOfs6io9hD7DSU+nnnuctvnCwWZH/Zy6T1LHdO4i7gxipbaLoy6NgfU12ahiTV31BwAsNQwNctNDcnJgOFGyBZJ8jmm6+q6UIVSbyKCmpXJueZg/MXLpWQ1e3eVd+iGihBg==
+     procedure_id : 1458396466707128756
+     type_code : 15
+     code : |1-
+      // Summary: Disconnects the current user
+      // Syntax:
+      // Disconnects ()
+      //
+      procedure Disconnect()
+      
+       // Erases the global of the identifier
+      gnCurrentCustomer = 0
+      
+      CookieWrite(COOKIE_EMAIL, "")
+      CookieWrite(COOKIE_password, "")
+     type : 458752
+   -
+     name : SendEmailPasswordReminder
+     internal_properties : CAAAAAgAAAC5yMQDRktEGfq6m232PE8TqPG2mYSkmeHlnUFL2ZVX+LRJR6RXnmneJBRU/fmryu5KJ9VjjoeE5zl5vaa+7Xfk3TEh2TifuchA8V8i0hZhB59DU4+h34jFjbq447BQc+3neSw7YjItyAyn4IhYq/KYVwWpR5FIddZNCi4O8VM2NQ==
+     procedure_id : 1458396466707194292
+     type_code : 15
+     code : |1+
+      // Summary: Sends a message for reminding the password
+      // Syntax:
+      //SendEmailPasswordReminder (<nUserID> is 8-byte int, <sNewPassword> is string)
+      //
+      // Parameters:
+      //	nUserID (8-byte integer): Identifier of the user
+      //	sNewPassword (ANSI string): New password
+      
+      procedure SendEmailPasswordReminder( nIDUtil is 8-byte int, sNewPassword is string )
+      
+      // Positions on the record of the user
+      HReadSeekFirst(customer,CustomerID,nIDUtil)
+      
+      Email.Subject = StringBuild("Reset your %1 password",gsSiteName)
+      Email.Sender = gsEmailActivationSender
+      Email.Recipient[1] = customer.eMail
+      Email.NbRecipient = 1
+      Email.Message = StringBuild(<§@1e11e57d00c85e220000§>,gsSiteName,sNewPassword)
+      
+      
+      // Switches the time-out to 3 seconds (the SMTP server is on localhost therefore there is a problem if it takes more than 3 seconds to respond)
+      EmailSetTimeOut(3)
+      
+      if gsSMTPLogin = "" then
+      	Error("Debug information: Fill the parameters for sending emails")
+      	return
+      end
+      
+      if EmailStartSMTPSession(gsSMTPLogin,gsSMTPPassword,gsSMTPServer,gnSMTPPort) then
+      	EmailSendMessage(gsSMTPLogin)
+      	EmailCloseSession(gsSMTPLogin)
+      end
+      
+     type : 458752
+   -
+     name : nCurrentCustomer
+     procedure_id : 1458396466707259828
+     type_code : 15
+     code : |1+
+      // Summary: Returns the identifier of the connected user
+      // Syntax:
+      //[ <Result> = ] nUserID ()
+      //
+      // Parameters:
+      //	None
+      
+      procedure nCurrentCustomer()
+      
+      return gnCurrentCustomer
+     type : 458752
+   -
+     name : ReinitializePassword
+     internal_properties : CAAAAAgAAACJDsyMqYcQGXYVFldAJKoBTN9Z1iVvI9Dr4TuB5weFwrLXTWKNJEvEYoreSxFEQURr3ylnXOUabyCZvQaP93fkXbGlTfwr5evhGuZLhaNKAfu46W+hO+ylYTag+wjIR2VD3YRbAr5zoqtOeBcyBCW/Vn13MSv/p5ijSLCVM2UGBQ==
+     procedure_id : 1458396466707325364
+     type_code : 15
+     code : |1+
+      // Summary: Reinitializes the password of a user, disables the account and sends the activation email
+      // Syntax:
+      //[ <Result> = ] ReinitializePassword (<sUserID> is string)
+      //
+      // Parameters:
+      //	sUserID (ANSI string): Name or email of user
+      
+      procedure ReinitializePassword( sUserID is string )
+      
+      // Checks whether the account exists and whether it is enabled
+      //(If available identifier, it means that the account does not exist)
+      if bCheckAvailableIdentifier(sUserID,True) = True then
+      	return False
+      end
+      
+      
+      // Generates a new password
+      sNewPWD is string
+      loop (8)
+      	sNewPWD += Charact(47+Random(75))
+      end
+      
+      // Reinitializes the account
+      customer.Password = sNewPWD
+      HModify(customer)
+      
+      // Sends the activation email
+      SendEmailPasswordReminder(customer.CustomerID,sNewPWD)
+      
+      return True
+      
+     type : 458752
+   -
+     name : bCheckAvailableIdentifier
+     internal_properties : CAAAAAgAAABk2piQTHc9frUYXC8sGrFNdcD6A/V8pr7a2vCJUrrLdXKYnWF8rhmA8NMIXOr9X7Ar7TD9Wujp9jHrkBgEgeqfpH9wUx6NSVSV/qWEdwJENj3QB7p0JHM=
+     procedure_id : 1458396466707390900
+     type_code : 15
+     code : |1-
+      // Summary: Checks whether an identifier is not already used (as email or display name)
+      // Syntax:
+      //[ <Result> = ] bCheckAvailableIdentifier (<sIdentifier> is string [, <bLockRec> is boolean])
+      //
+      // Parameters:
+      //	sIdentifier (string): String to check
+      //	bLockRec (boolean - default value=0): indicates whether the read operation must lock the record
+      // Return value:
+      // 	boolean: True if the identifier does not exist neither as email, nor as display name
+      //
+      procedure bCheckAvailableIdentifier( sIdentifier is string, bLockRec is boolean = False )
+      
+      nFlag is int = hLockNo
+      if bLockRec then nFlag = hLockWrite
+      
+      // Check the emails
+      if HReadSeekFirst(customer,eMail,sIdentifier,nFlag) then
+      	return False
+      end
+      
+      // Check the display names
+      if HReadSeekFirst(customer,Name,sIdentifier,nFlag) then
+      	return False
+      end
+      
+      // The identifier is free
+      return True
+     type : 458752
+   -
+     name : DisplayableAddress
+     procedure_id : 1458396466707456436
+     type_code : 15
+     code : |1-
+      // Summary: Used to retrieve a displayable address
+      // Syntax:
+      //[ <Result> = ] DisplayableAddress (<nAddressID> is 8-byte int, <nOption> is int)
+      //
+      // Parameters:
+      //	nAddressID (8-byte integer): Identifier of the address
+      //	nOption (integer): <specify the role of bArchivedAddress>
+      
+      procedure DisplayableAddress(nAddressID is 8-byte int, nOption is int )
+      
+      bArchivedAddress is boolean = (BinaryAND(nOption,ADDR_ARCHIVE)>0)
+      
+      dsAddress is data source
+      sAddress is string
+      // Create an alias on the proper file and we will be using this alias
+      if bArchivedAddress then
+      	HAlias(ArchiveAddress,dsAddress)
+      	HChangeName(dsAddress, ArchiveAddress.PhysicalName)
+      else
+      	HAlias(Address,dsAddress)
+      	HChangeName(dsAddress, Address.PhysicalName)
+      end
+      
+      // Search for the address
+      HReadSeekFirst(dsAddress,IDAdresse,nAddressID)
+      if HFound(dsAddress) then
+      	// Format the address
+      	sAddress = dsAddress.Company
+      	sAddress += [CR] + dsAddress.Way
+      	sAddress += [CR] + dsAddress.Complement
+      	sAddress += [CR] + dsAddress.LocalityPOB
+      	sAddress += [CR] + dsAddress.ZipCode + [" "] + dsAddress.City
+      	sAddress += [CR] + dsAddress.StateProvince
+      	sAddress += [CR] + dsAddress.Country
+      end
+      
+      // return the formatted address
+      return sAddress
+      
+      end:
+      HCancelAlias(dsAddress)
+     type : 458752
+   -
+     name : TitleToString
+     procedure_id : 1458396466707521972
+     type_code : 15
+     code : |1-
+      // Summary: Returns the title in string
+      // Syntax:
+      //[ <Result> = ] GenderToString (<nGender> [, <bAbbreviated>])
+      //
+      // Parameters:
+      //	nGender: Gender number
+      // 	bAbbreviated (default value=1): abbreviated or in full
+      // Return value:
+      // 	string: The title in string
+      
+      procedure TitleToString(nTitle, bAbbreviated = True)
+      
+      if bAbbreviated then
+      	switch nTitle
+      		case 1 // Mr
+      			return "Mr"
+      		case 2 // Mrs
+      			return "Mrs"
+      		case 3 // Miss
+      			return "Miss"
+      		other case
+      			dbgAssert(False,"Unknown title")
+      			return ""
+      	end
+      else
+      	switch nTitle
+      		case 1 // Mr
+      			return "Mister"
+      		case 2 // Mrs
+      			return "Madam"
+      		case 3 // Miss
+      			return "Miss"
+      		other case
+      			dbgAssert(False,"Unknown title")
+      			return ""
+      	end
+      	
+      end
+     type : 458752
+   -
+     name : CheckConnection
+     procedure_id : 1458396466707587508
+     type_code : 15
+     code : |1+
+      // Summary: Checks whether a connection is in progress
+      // Syntax:
+      //CheckConnection ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      procedure MyPage()
+      
+      //IF no customer is connected yet, try to connect via cookies
+      if bIsConnected() = False then
+      	
+      	sEmail is string = CookieRead(COOKIE_EMAIL)
+      	sPWD is string = CookieRead(COOKIE_password)
+      	
+      	if bConnected(sEmail, sPWD) = False then
+      		PageDisplay(index) // Page for connecting to the customer account
+      	end
+      end
+     type : 458752
+   -
+     name : AddressFullName
+     procedure_id : 1458396466707653044
+     type_code : 15
+     code : |1-
+      // Summary: Used to retrieve a display address
+      // Syntax:
+      //[ <Result> = ] AddressFullName (<nAddressID> is 8-byte int, <nOption> is int)
+      //
+      // Parameters:
+      //	nAddressID (8-byte integer): Identifier of the address
+      //	nOption (integer): <specify the role of nOption>
+      
+      procedure AddressFullName(nAddressID is 8-byte int, nOption is int )
+      
+      bArchivedAddress is boolean = (BinaryAND(nOption,ADDR_ARCHIVE)>0)
+      
+      dsAddress is data source
+      
+      // Create an alias on the proper file and we will be using this alias
+      if bArchivedAddress then
+      	HAlias(ArchiveAddress,dsAddress)
+      	HChangeName(dsAddress, ArchiveAddress.PhysicalName)
+      else
+      	HAlias(Address,dsAddress)
+      	HChangeName(dsAddress, Address.PhysicalName)
+      end
+      
+      // Search for the address
+      HReadSeekFirst(dsAddress,IDAdresse,nAddressID)
+      if HFound(dsAddress) then
+      	// Format the address
+      	// return the formatted address
+      	return dsAddress.FullName
+      
+      end
+      
+      dbgAssert(False,"Address not found")
+      return ""
+      
+      
+      end:
+      HCancelAlias(dsAddress)
+     type : 458752
+   -
+     name : SendRequest
+     internal_properties : CAAAAAgAAAAhiV7u3unORLw/gB7Lyhykg5cbrqjWhKiigCTamjBBaNbPr1PA0uzPGz2gwODpQA5qE2LhN3GnDLlUh0RhbZ9zcpNk6lP/x9TJb2piy/9RfzAtJqC8N0R75CJdy0n9+71wsXnCy8D/BJkCUb6MrOO/idTZx8OYUPhaJL+JV2yW
+     procedure_id : 1458396466707718580
+     type_code : 15
+     code : |1+
+      // Summary: <specify the action of the procedure>
+      // Syntax:
+      //[ <Result> = ] SendRequest (<sRequest>)
+      //
+      // Parameters:
+      //	sRequest: <sepcify the role of sRequest>
+      // Return value:
+      // 	boolean: // 	None
+      
+      procedure SendRequest(sRequest)
+      
+      bRes is boolean
+      
+      Email.Subject = StringBuild("Request from the site: ",gsSiteName)
+      Email.Sender = gsEmailActivationSender
+      Email.Recipient[1] = gsEmailTechnicalSupport
+      Email.NbRecipient = 1
+      Email.Message = sRequest
+      
+      
+      // Switches the time-out to 3 seconds (the SMTP server is on localhost therefore there is a problem if it takes more than 3 seconds to respond)
+      EmailSetTimeOut(3)
+      
+      if EmailStartSMTPSession(gsSMTPLogin,gsSMTPPassword,gsSMTPServer,gnSMTPPort) then
+      	
+      	bRes = EmailSendMessage(gsSMTPLogin)
+      	EmailCloseSession(gsSMTPLogin)
+      else
+      	bRes = False
+      end
+      
+      return bRes
+     type : 458752
+   -
+     name : GetCustomer
+     procedure_id : 1458396466707784116
+     type_code : 15
+     code : |1+
+      procedure GetCustomer( nCustomerID is 8-byte int )
+      
+      dbgAssert(nCustomerID<>0)
+      
+      stCustomerInfo is STCustomer
+      if HReadSeekFirst(customer,CustomerID,nCustomerID) then
+      	FileToMemory(stCustomerInfo,customer)
+      end
+      
+      return stCustomerInfo
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1e11e57d00c85e22
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : "Hello, \r\n\r\nYour password on the %1 site was reinitialized.\r\nYour new password is: %2\r\n\r\nBest regards, \r\nThe %1 team\r\n"
+     index : 0
+   -
+     text :
+      en-GB : A new password was generated and it was emailed to you.
+     index : 1
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

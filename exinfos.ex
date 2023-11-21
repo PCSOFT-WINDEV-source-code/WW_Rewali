@@ -1,0 +1,9 @@
+[INFOS]
+gaf=0
+title=WW_Rewali
+image=description.gif
+description=description.rtf
+source=1
+typesite=0
+[OBJECT]
+WW_Rewali.wwp=4096

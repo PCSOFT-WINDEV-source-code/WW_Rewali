@@ -1,0 +1,109 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : pPayPal
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x153c8291001728f0
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAADlWfvJTk5t3/Tto9yRvXWeNpJAUaGmtiCoYwaIvVF8agqZ+Wa6riqGio8+iGdpz+e0/XsveB3kCrrXtPb/KEK4IN0bZwzpw13qztPh4vE6tMf16HoSJlx2iAX7FX85F+4Wm+UFMU2cUDHubaE6W+QvkswPwgA/GOnliGTcAJc16Q68u7gIIGyyajzDKgg18DpLRQ5aWMklkL7erXtqeO99kYU2vDVsCWn0WagaycK3d351OWye1ee+lFe4cnC22PlFTNCX
+     code : |1+
+      
+      //
+      public
+      
+      // Other currencies
+      constant
+      	eUSD = -24		// Currency: US Dollars
+      	eJPY = -25		// Currency: Yen
+      end
+      
+      
+      
+      // Payment buttons
+      constant
+      	BT_BUY_GRAPHIC_82x21		 = "https://www.paypal.com/en_US//i/btn/btn_buynow_SM.gif"
+      	BT_PAY_GRAPHIC_69x21		 = "https://www.paypal.com/en_US//i/btn/btn_paynow_SM.gif"
+      	BT_BUY_GRAPHIC_93x26		 = "https://www.paypal.com/en_US//i/btn/btn_buynow_LG.gif"
+      	BT_PAY_GRAPHIC_78x26		 = "https://www.paypal.com/en_US//i/btn/btn_paynow_LG.gif"
+      	BT_BUY_GRAPHIC_192x47		 = "https://www.paypal.com/en_US//i/btn/btn_buynowCC_LG.gif"
+      	BT_PAY_GRAPHIC_118x47		 = "https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif"
+      	BT_IMG_CLASSIC_125x21			 = "https://www.paypal.com/en_US/i/btn/x-click-but23.gif"		// 125x21 image
+      	BT_TXT_CLASSIC_136x23			 = "https://www.paypal.com/en_US//i/btn/x-click-but9.gif"		// 136x23 image
+      	BT_IMG_CC_120x44	   			 = "https://www.paypal.com/en_US//i/btn/x-click-butcc.gif"		// 120x44 image
+      	BT_IMG_PAYMENTS_PAYPAL_70x31	 = "https://www.paypal.com/en_US//i/btn/x-click-but02.gif"		// 70x31 image
+      	BT_IMG_VALIDPAYM_PAYPAL_120x31	 = "https://www.paypal.com/en_US//i/btn/x-click-but03.gif"		// 120x31 image
+      	BT_IMG_BUYNOW_PAYPAL_105x31  = "https://www.paypal.com/en_US//i/btn/x-click-but01.gif"		// 105x31 image
+      	BT_IMG_CLICK_BUY_160x52		 = "https://www.paypal.com/en_US//i/btn/x-click-but5.gif"		// 160x52 image
+      	BT_IMG_CLICK_PAY_174x52		 = "https://www.paypal.com/en_US/i/btn/x-click-but6.gif"		// 174x52 image
+      end
+      
+      // Return modes of payment pages
+      constant
+      	rm_default	= 0		// Return modes by default
+      	rm_get		= 1		// 'GET' return mode
+      	rm_post		= 2		// 'POST' return mode
+      end
+      
+      restreint
+      gsPayPalAccount is string
+      gbTestMode is boolean = True
+      
+     type : 720896
+  procedures :
+   -
+     name : PayPalUserAccount
+     internal_properties : CAAAAAgAAABDUdex3fXhHmd86AatwtUeeteOZlQJjoW1Z1aWeHB641lzsQYEI7snzsBW/SeikMw3olDo0OtpEGj73o18Vjx8Kz+zRNMn2JYGWyGR/j4wpGVEVwy53HQGYqlhg1RutNbEA8iUBF7FJd8=
+     procedure_id : 1530286200382544962
+     type_code : 15
+     code : |1-
+      // Summary: Defines the main PayPal account
+      // Syntax:
+      //PayPalUserAccount (<sAccount>)
+      //
+      // Parameters:
+      // 	sAccount: Email address of your PayPal account
+      // Return value:
+      // 	None
+      //
+      procedure PayPalUserAccount(sAccount)
+      
+      	gsPayPalAccount = sAccount
+     type : 458752
+   -
+     name : EnableTestMode
+     procedure_id : 1530294068762759048
+     type_code : 15
+     code : |1-
+      // Summary: Enables the test mode (enabled by default)
+      // Syntax:
+      //EnableTestMode (<bTestMode>)
+      //
+      // Parameters:
+      // 	bTestMode: True to enable the test mode, False to disable it
+      // Return value:
+      // 	None
+      //
+      procedure EnableTestMode(bTestMode)
+      
+      	gbTestMode = bTestMode
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_Collection1
+resources :
+ string_res :
+  identifier : 0x153c8284000ff87a
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
